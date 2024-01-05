@@ -29,6 +29,70 @@
 Traversable Интерфейс, определяющий, является ли класс обходимым (traversable) с использованием foreach.
 Абстрактный базовый интерфейс, который не может быть реализован сам по себе. Вместо этого должен реализовываться IteratorAggregate или Iterator.
 
+IteratorAggregate
+```php
+<?php
+class myData implements IteratorAggregate {
+    public $property1 = "Первое общедоступное свойство";
+    public $property2 = "Второе общедоступное свойство";
+    public $property3 = "Третье общедоступное свойство";
+    public $property4 = "";
+
+    public function __construct() {
+        $this->property4 = "последнее свойство";
+    }
+
+    public function getIterator(): Traversable {
+        return new ArrayIterator($this);
+    }
+}
+
+$obj = new myData;
+
+foreach($obj as $key => $value) {
+    var_dump($key, $value);
+    echo "\n";
+}
+?>
+```
+
+Iterator
+```php
+class myIterator implements Iterator {
+    private $position = 0;
+    private $array = array(
+        "firstelement",
+        "secondelement",
+        "lastelement",
+    );
+
+    public function __construct() {
+        $this->position = 0;
+    }
+
+    public function rewind(): void {
+        $this->position = 0;
+    }
+
+    #[\ReturnTypeWillChange]
+    public function current() {
+        return $this->array[$this->position];
+    }
+
+    #[\ReturnTypeWillChange]
+    public function key() {
+        return $this->position;
+    }
+
+    public function next(): void {
+        ++$this->position;
+    }
+
+    public function valid(): bool {
+        return isset($this->array[$this->position]);
+    }
+}
+```
 # Работа с ссылками
 
 * Передача по ссылке - передача параметров по ссылке. При этом локальная переменная в функции и переменная в вызывающей области видимости ссылаются на одно и то же содержимое.
