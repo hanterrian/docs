@@ -22,3 +22,11 @@
 * make:command – Creates a new Artisan command
 * make:mail – Creates a new email class
 * make:channel – Creates a new channel class for broadcasting 
+
+# laravel lifecycle
+
+* Entry point
+* HTTP / Console Kernels
+* Service Providers
+* Routing
+* Controller/Other
