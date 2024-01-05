@@ -31,4 +31,4 @@
 * Routing
 * Controller/Other
 
-![](img\laravel_lifecycle.png)
+![](img/laravel_lifecycle.png)
