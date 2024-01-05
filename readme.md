@@ -12,7 +12,14 @@
 * array
 * object
 * callable
-* iterable
+* iterable = array | Traversable специальный тип для отделения массивов от иттераторов
+
+```
+  iterable ---> array
+           --> Traversable ---> Iterator
+                           --> IteratorAggregate
+                           --> Generator
+```
 
 Специальные типы:
 
