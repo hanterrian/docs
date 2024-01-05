@@ -30,3 +30,5 @@
 * Service Providers
 * Routing
 * Controller/Other
+
+![](img\laravel_lifecycle.png)
