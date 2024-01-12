@@ -48,7 +48,7 @@ DROP TABLE IF EXISTS table1;
 
 # Raw transaction
 
-```mysql
+```bash
 START TRANSACTION;
     INSERT INTO users (name, email) VALUES ('John Doe', 'johndoe@example.com');
     UPDATE accounts SET balance = SUM(balance) WHERE name = 'John Doe';
