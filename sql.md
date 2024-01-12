@@ -31,6 +31,48 @@ ALTER TABLE access_token
 После ключевого слова DEFERRABLE следует либо INITIALLY DEFERRED, либо INITIALLY IMMEDIATE. В первом случае проверка будет отложена до момента фиксации каждой транзакции. Во втором случае проверка будет выполняться сразу после каждого
 оператора.
 
+# Update
+
+```mysql
+UPDATE table_name
+SET column1 = value1,
+    column2 = value2, ...
+    WHERE condition;
+```
+
+# Delete
+
+```mysql
+DROP TABLE IF EXISTS table1;
+```
+
+# Raw transaction
+
+```mysql
+START TRANSACTION;
+    INSERT INTO users (name, email) VALUES ('John Doe', 'johndoe@example.com');
+    UPDATE accounts SET balance = SUM(balance) WHERE name = 'John Doe';
+COMMIT;
+
+START TRANSACTION;
+    INSERT INTO users (name, email) VALUES ('John Doe', 'johndoe@example.com');
+    UPDATE accounts SET balance = SUM(balance) WHERE user_id=15;
+ROLLBACK;
+
+START TRANSACTION;
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+        START TRANSACTION
+            ROLLBACK;
+            RESIGNAL;
+        END;
+    UPDATE accounts SET balance = 5000 WHERE user_id = 1;
+    UPDATE accounts SET balance = 1000 WHERE user_id = 2;
+    IF (SELECT balance FROM accounts WHERE user_id = 1) < 0 THEN
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'Insufficient balance';
+    END IF;
+COMMIT;
+```
+
 # Приверы
 
 Вывести список сотрудников, получающих заработную плату большую чем у непосредственного руководителя
