@@ -209,3 +209,13 @@ FROM users;
 ```mysql
 ALTER TABLE first_table RENAME second_table;
 ```
+
+Выдать список книг у которых один автор
+
+```mysql
+SELECT b.*, atb.author_id as author
+FROM book b
+         LEFT JOIN author_to_book atb ON atb.book_id = b.id
+GROUP BY b.id
+HAVING COUNT(author) = 1
+```
