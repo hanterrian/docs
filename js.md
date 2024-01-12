@@ -2,6 +2,8 @@ https://habr.com/ru/articles/486820/
 
 https://habr.com/ru/companies/constanta/articles/435700/
 
+https://github.com/likezninjaz/react-ru-interview-questions
+
 # Операторы
 
 * Операторы присваивания
